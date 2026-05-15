@@ -13,7 +13,21 @@ const authenticatedUser = (username, password) => {
   return users.some(user => user.username === username && user.password === password);
 };
 
-regd_users.post("/customer/login", (req, res) => {
+regd_users.post("/register", (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username and password required" });
+  }
+  if (users.some(u => u.username === username)) {
+    return res.status(409).json({ message: "User already exists" });
+  }
+
+  users.push({ username, password });
+  return res.status(200).json({ message: "User successfully registered" });
+});
+
+regd_users.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({ message: "Username and password required" });
@@ -26,7 +40,6 @@ regd_users.post("/customer/login", (req, res) => {
   return res.status(401).json({ message: "Invalid credentials" });
 });
 
-// Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
   const isbn = req.params.isbn;
   const review = req.query.review; // відгук передається як query

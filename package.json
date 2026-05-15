@@ -1,6 +1,16 @@
 {
+  "name": "expressBookReviews",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon final_project/index.js"
+  },
   "dependencies": {
+    "axios": "^1.16.1",
     "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3"
+    "express-session": "^1.19.0",
+    "jsonwebtoken": "^9.0.3",
+    "nodemon": "^3.1.14"
   }
 }
